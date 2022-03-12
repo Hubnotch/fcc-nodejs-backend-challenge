@@ -25,20 +25,18 @@ app.get("/api/", function (req, res) {
   res.json({ unix: date.valueOf(), utc: date.toUTCString() });
 });
 
-app.get("/api/:time_stamp", function (req, res) {
-  let dateString = req.params.time_stamp;
-  let date = new Date(dateString);
- 
+app.get("/api/:date", function (req, res) {
+  let dateString = req.params.date;
+  
   if (dateString.match(/\d{5,}/)) {
-    let newUnix = parseInt(dateString);
-    res.json({ unix: newUnix, utc: new Date(newUnix).toUTCString() });
+    dateString = +dateString;
   }
+  let newDate = new Date(dateString)
 
-  let newDateObj = new Date();
-  if (newDateObj.toUTCString() == "") {
+  if (newDate.toUTCString() == "") {
     res.json({ error: "Invalid Date" });
   } else {
-    res.json({ unix: newDateObj.valueOf(), utc: newDateObj.toUTCString() });
+    res.json({ unix: newDate.valueOf(), utc: newDate.toUTCString() });
   }
 });
 
