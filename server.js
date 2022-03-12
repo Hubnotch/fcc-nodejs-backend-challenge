@@ -20,8 +20,10 @@ app.get("/", function (req, res) {
 
 // your first API endpoint...
 app.get("/api/:date", function (req, res) {
-  let timeInUTC = new Date(req.params.date).toUTCString();
-  let timeInUNIX = Date.parse(timeInUTC)
+  let date = req.params.date
+  let timeInUTC = new Date(date).toUTCString();
+  let timeInUNIX = Date.valueOf(date)
+  // let timeInUNIX = Date.parse(timeInUTC)
   let inputParams = req.params.date;
   console.log(inputParams);
 
